@@ -38,6 +38,12 @@ class DynamicUnsortedArray:
 
         return None
 
+    """ Time Complexity: O(n) """
+    def iter(self):
+
+        for i in range(self.n):
+            print(str(self.xs[i]) + ' ')
+
     ###########################################################################
     # Dynamic set operations
     ###########################################################################
@@ -70,6 +76,10 @@ class DynamicUnsortedArray:
     ###########################################################################
     # Ordered set operations
     ###########################################################################
+
+    """ Time Complexity: O(n) """
+    def order_iter(self):
+        pass
 
     """ Time Complexity: O(n) """
     def find_next(self, k):

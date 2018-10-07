@@ -1,7 +1,7 @@
 +------------------------+------------------+-----------------------+--------------------------------------------------------------------------+-----------------------------+
 |                        | Set              | Dynamic Set           | Ordered Set                                                              | Dynamic Ordered Set         |
 +------------------------+---------+--------+-----------+-----------+--------------+--------------+------------------+------------+------------+--------------+--------------+
-| Set Implementation     | find(k) | iter() | insert(x) | delete(k) | order-iter() | find_next(k) | find_previous(k) | find_max() | find_min() | delete_max() | delete_min() |
+| Set Implementation     | find(k) | iter() | insert(x) | delete(k) | order_iter() | find_next(k) | find_previous(k) | find_max() | find_min() | delete_max() | delete_min() |
 +------------------------+---------+--------+-----------+-----------+--------------+--------------+------------------+------------+------------+--------------+--------------+
 | Fixed Unsorted Array   | O(n)    | O(n)   | O(n)      | O(n)      | O(n)         | O(n)         | O(n)             | O(n)       | O(n)       | O(n)         | O(n)         |
 | Linked List            | O(n)    | O(n)   | O(1)      | O(n)      | O(n)         | O(n)         | O(n)             | O(n)       | O(n)       | O(n)         | O(n)         |

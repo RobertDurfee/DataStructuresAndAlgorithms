@@ -5,7 +5,7 @@ class LinkedList:
 
     """ Time Complexity: O(1) """
     def __init__(self):
-        self.head = None
+        self.left = None
 
     ###########################################################################
     # Set operations
@@ -14,7 +14,7 @@ class LinkedList:
     """ Time Complexity: O(n) """
     def find(self, k):
 
-        node = self.head
+        node = self.left
         while node is not None:
 
             if node.get_x().k == k:
@@ -24,6 +24,16 @@ class LinkedList:
 
         return None
 
+    """ Time Complexity: O(n) """
+    def iter(self):
+
+        node = self.left
+        while node is not None:
+
+            print(str(node.get_x()) + ' ')
+
+            node = node.get_right()
+
     ###########################################################################
     # Dynamic set operations
     ###########################################################################
@@ -31,14 +41,14 @@ class LinkedList:
     """ Time Complexity: O(1) """
     def insert(self, x):
 
-        node = LinkedListNode(None, x, self.head)
-        self.head.set_left(node)
-        self.head = node
+        node = LinkedListNode(None, x, self.left)
+        self.left.set_left(node)
+        self.left = node
 
     """ Time Complexity: O(n) """
     def delete(self, k):
 
-        node = self.head
+        node = self.left
         while node is not None:
 
             if node.get_x().k == k:
@@ -56,12 +66,16 @@ class LinkedList:
     ###########################################################################
 
     """ Time Complexity: O(n) """
+    def order_iter(self):
+        pass
+
+    """ Time Complexity: O(n) """
     def find_next(self, k):
 
         next_k = None
         next_x = None
 
-        node = self.head
+        node = self.left
         while node is not None:
 
             if (k < node.get_x().k < next_k) \
@@ -80,7 +94,7 @@ class LinkedList:
         previous_k = None
         previous_x = None
 
-        node = self.head
+        node = self.left
         while node is not None:
 
             if (previous_k < node.get_x().k < k) \
@@ -96,13 +110,13 @@ class LinkedList:
     """ Time Complexity: O(n) """
     def find_max(self):
 
-        if self.head is None:
+        if self.left is None:
             return None
 
-        max_k = self.head.get_x().k
-        max_x = self.head.get_x()
+        max_k = self.left.get_x().k
+        max_x = self.left.get_x()
 
-        node = self.head
+        node = self.left
         while node is not None:
 
             if node.get_x().k > max_k:
@@ -117,13 +131,13 @@ class LinkedList:
     """ Time Complexity: O(n) """
     def find_min(self):
 
-        if self.head is None:
+        if self.left is None:
             return None
 
-        min_k = self.head.get_x().k
-        min_x = self.head.get_x()
+        min_k = self.left.get_x().k
+        min_x = self.left.get_x()
 
-        node = self.head
+        node = self.left
         while node is not None:
 
             if node.get_x().k < min_k:
