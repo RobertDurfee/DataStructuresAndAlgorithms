@@ -1,8 +1,9 @@
-class FixedUnsortedArray:
+class DynamicUnsortedArray:
 
-    """ Time Complexity: O(1) """
+    """ Time Complexity: O(n) """
     def __init__(self):
 
+        self.N = 0
         self.n = 0
         self.xs = None
 
@@ -10,9 +11,18 @@ class FixedUnsortedArray:
     # Utilities
     ###########################################################################
 
-    """ Time Complexity: O(n) """
     def allocate(self, N):
         return [None] * N
+
+    def resize(self, N):
+
+        xs_ = self.allocate(N)
+
+        for i in range(self.n):
+            xs_[i] = self.xs[i]
+
+        self.xs = xs_
+        self.N = N
 
     ###########################################################################
     # Set operations
@@ -32,39 +42,30 @@ class FixedUnsortedArray:
     # Dynamic set operations
     ###########################################################################
 
-    """ Time Complexity: O(n) """
+    """ Time Complexity: O(1) (Amortized) """
     def insert(self, x):
 
-        xs_ = self.allocate(self.n + 1)
+        if self.n == self.N:
+            self.resize(self.N * 2)
 
-        for i in range(self.n):
-            xs_[i] = self.xs[i]
-
-        xs_[self.n] = x
-
-        self.xs = xs_
+        self.xs[self.n] = x
         self.n += 1
 
     """ Time Complexity: O(n) """
     def delete(self, k):
 
-        xs_ = self.allocate(self.n - 1)
+        if self.n < self.N // 4:
+            self.resize(self.N // 2)
 
         for i in range(self.n):
 
             if self.xs[i].k == k:
 
                 for j in range(i, self.n - 1):
-                    xs_[j] = self.xs[j + 1]
+                    self.xs[j] = self.xs[j + 1]
 
-                self.xs = xs_
                 self.n -= 1
                 return
-
-            if i == self.n - 1:
-                return
-
-            xs_[i] = self.xs[i]
 
     ###########################################################################
     # Ordered set operations
