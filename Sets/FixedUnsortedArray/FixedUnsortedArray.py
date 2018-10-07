@@ -1,15 +1,15 @@
 """
-Elements in this data structure must have a 'k' property representing a key
+xs in this data structure must have a 'k' property representing a key
 for comparisons.
 """
 class FixedUnsortedArray:  # noqa: E302
 
     """ Time Complexity: O(n) """
-    def __init__(self, size):
+    def __init__(self, N):
 
-        self.size = size
+        self.N = N
         self.n = 0
-        self.elements = [None] * size
+        self.xs = [None] * N
 
     ###########################################################################
     # Set operations
@@ -20,8 +20,8 @@ class FixedUnsortedArray:  # noqa: E302
 
         for i in range(self.n):
 
-            if self.elements[i].k == k:
-                return self.elements[i]
+            if self.xs[i].k == k:
+                return self.xs[i]
 
         return None
 
@@ -32,10 +32,10 @@ class FixedUnsortedArray:  # noqa: E302
     """ Time Complexity: O(n) """
     def insert(self, x):
 
-        if self.n == self.size:
+        if self.n == self.N:
             raise IndexError('Insert Error: FixedUnsortedArray is full.')
 
-        self.elements[self.n] = x
+        self.xs[self.n] = x
         self.n += 1
 
     """ Time Complexity: O(n) """
@@ -43,10 +43,10 @@ class FixedUnsortedArray:  # noqa: E302
 
         for i in range(self.n):
 
-            if self.elements[i].k == k:
+            if self.xs[i].k == k:
 
                 for j in range(i, self.n - 1):
-                    self.elements[j] = self.elements[j + 1]
+                    self.xs[j] = self.xs[j + 1]
 
                 self.n -= 1
                 return
@@ -62,41 +62,33 @@ class FixedUnsortedArray:  # noqa: E302
     def find_next(self, k):
 
         next_k = None
-        next_element = None
+        next_x = None
 
         for i in range(self.n):
 
-            if next_k is None and k < self.elements[i].k:
+            if (k < self.xs[i].k < next_k) \
+               or (next_k is None and k < self.xs[i].k):
 
-                next_k = self.elements[i].k
-                next_element = self.elements[i]
+                next_k = self.xs[i].k
+                next_x = self.xs[i]
 
-            elif k < self.elements[i].k < next_k:
-
-                next_k = self.elements[i].k
-                next_element = self.elements[i]
-
-        return next_element
+        return next_x
 
     """ Time Complexity: O(n) """
     def find_previous(self, k):
 
         previous_k = None
-        previous_element = None
+        previous_x = None
 
         for i in range(self.n):
 
-            if previous_k is None and self.elements[i] < k:
+            if (previous_k < self.xs[i].k < k) \
+               or (previous_k is None and self.xs[i] < k):
 
-                previous_k = self.elements[i].k
-                previous_element = self.elements[i]
+                previous_k = self.xs[i].k
+                previous_x = self.xs[i]
 
-            elif previous_k < self.elements[i].k < k:
-
-                previous_k = self.elements[i].key
-                previous_element = self.elements[i]
-
-        return previous_element
+        return previous_x
 
     """ Time Complexity: O(n) """
     def find_max(self):
@@ -104,17 +96,17 @@ class FixedUnsortedArray:  # noqa: E302
         if self.n == 0:
             return None
 
-        max_k = self.elements[0].k
-        max_element = self.elements[0]
+        max_k = self.xs[0].k
+        max_x = self.xs[0]
 
         for i in range(1, self.n):
 
-            if self.elements[i].k > max_k:
+            if self.xs[i].k > max_k:
 
-                max_k = self.elements[i].k
-                max_element = self.elements[i]
+                max_k = self.xs[i].k
+                max_x = self.xs[i]
 
-        return max_element
+        return max_x
 
     """ Time Complexity: O(n) """
     def find_min(self):
@@ -122,17 +114,17 @@ class FixedUnsortedArray:  # noqa: E302
         if self.n == 0:
             return None
 
-        min_k = self.elements[0].k
-        min_element = self.elements[0]
+        min_k = self.xs[0].k
+        min_x = self.xs[0]
 
         for i in range(1, self.n):
 
-            if self.elements[i].k < min_k:
+            if self.xs[i].k < min_k:
 
-                min_k = self.elements[i].k
-                min_element = self.elements[i]
+                min_k = self.xs[i].k
+                min_x = self.xs[i]
 
-        return min_element
+        return min_x
 
     ###########################################################################
     # Dynamic ordered set operations
