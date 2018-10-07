@@ -11,9 +11,11 @@ class DynamicUnsortedArray:
     # Utilities
     ###########################################################################
 
+    """ Time Complexity: O(n) """
     def allocate(self, N):
         return [None] * N
 
+    """ Time Complexity: O(n) """
     def resize(self, N):
 
         xs_ = self.allocate(N)

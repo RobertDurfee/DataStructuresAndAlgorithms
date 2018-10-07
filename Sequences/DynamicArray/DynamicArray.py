@@ -1,8 +1,9 @@
-class FixedArray:
+class DynamicArray:
 
     """ Time Complexity: O(1) """
     def __init__(self):
 
+        self.N = 0
         self.n = 0
         self.xs = None
 
@@ -13,6 +14,17 @@ class FixedArray:
     """ Time Complexity: O(n) """
     def allocate(self, N):
         return [None] * N
+
+    """ Time Complexity: O(n) """
+    def resize(self, N):
+
+        xs_ = self.allocate(N)
+
+        for i in range(self.n):
+            xs_[i] = self.xs[i]
+
+        self.xs = xs_
+        self.N = N
 
     ###########################################################################
     # Sequence operations
@@ -87,31 +99,24 @@ class FixedArray:
     """ Time Complexity: O(n) """
     def insert_at(self, i, x):
 
-        xs_ = self.allocate(self.n + 1)
-
-        for j in range(i):
-            xs_[j] = self.xs[j]
-
-        xs_[i] = x
+        if self.n == self.N:
+            self.resize(self.N * 2)
 
         for j in range(i, self.n):
-            xs_[j + 1] = self.xs[j]
+            self.xs[j + 1] = self.xs[j]
 
-        self.xs = xs_
+        self.xs[i] = x
         self.n += 1
 
     """ Time Complexity: O(n) """
     def delete_at(self, i):
 
-        xs_ = self.allocate(self.n - 1)
-
-        for j in range(i):
-            xs_[j] = self.xs[j]
+        if self.m < self.N // 4:
+            self.resize(self.N // 2)
 
         for j in range(i + 1, self.n):
-            xs_[j - 1] = self.xs[j]
+            self.xs[j - 1] = self.xs[j]
 
-        self.xs = xs_
         self.n -= 1
 
     ###########################################################################
@@ -122,7 +127,7 @@ class FixedArray:
     def insert_left(self, x):
         self.insert_at(0, x)
 
-    """ Time Complexity: O(n) """
+    """ Time Complexity: O(1) (Amortized) """
     def insert_right(self, x):
         self.insert_at(self.n - 1, x)
 
@@ -130,6 +135,6 @@ class FixedArray:
     def delete_left(self):
         self.delete_at(0)
 
-    """ Time Complexity: O(n) """
+    """ Time Complexity: O(1) (Amortized) """
     def delete_right(self):
         self.delete_at(self.n - 1)
