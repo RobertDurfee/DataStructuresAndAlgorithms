@@ -41,25 +41,60 @@ class LinkedList:
     """ Time Complexity: O(1) """
     def insert(self, x):
 
-        node = LinkedListNode(None, x, self.left)
-        self.left.set_left(node)
-        self.left = node
+        if self.n == 0:
+            self.left = self.right = LinkedListNode(None, x, None)
+
+        elif self.n > 0:
+
+            x_node = LinkedListNode(None, x, None)
+            x_node.set_right(self.left)
+            self.left.set_left(x_node)
+            self.left = x_node
+
+            self.n += 1
 
     """ Time Complexity: O(n) """
     def delete(self, k):
 
+        i = 0
         node = self.left
         while node is not None:
 
             if node.get_x().k == k:
 
-                node.get_left().set_right(node.get_right())
-                return
+                if self.n == 1:
 
+                    self.left = self.right = None
+                    self.n -= 1
+
+                    return
+
+                elif i == 0:
+
+                    self.left = self.left.get_right()
+                    self.left.set_right(None)
+
+                    self.n -= 1
+                    return
+
+                elif i == self.n - 1:
+
+                    self.right = self.right.get_left()
+                    self.right.set_right(None)
+
+                    self.n -= 1
+                    return
+
+                elif 0 < i < self.n - 1:
+
+                    node.get_right().set_left(node.get_left())
+                    node.get_left().set_right(node.get_right())
+
+                    self.n -= 1
+                    return
+
+            i += 1
             node = node.get_right()
-
-        raise KeyError(f'Delete Error: Key {k} is not contained in ' +
-                       'LinkedList.')
 
     ###########################################################################
     # Ordered set operations
