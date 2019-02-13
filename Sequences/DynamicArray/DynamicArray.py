@@ -3,9 +3,9 @@ class DynamicArray:
     """ Time Complexity: O(1) """
     def __init__(self):
 
-        self.N = 0
-        self.n = 0
-        self.xs = None
+        self.N = 1
+        self.left = self.right = None
+        self.xs = self.allocate(1)
 
     ###########################################################################
     # Utilities
@@ -21,6 +21,24 @@ class DynamicArray:
         xs_ = self.allocate(N)
 
         for i in range(self.n):
+            xs_[i] = self.xs[i]
+
+        self.xs = xs_
+        self.N = N
+
+    """ Time Complexity: O(n) """
+    def resize_left(self, N):
+
+        xs_ = self.allocate(N)
+
+
+
+    """ Time Complexity: O(n) """
+    def resize_right(self, N):
+
+        xs_ = self.allocate(N)
+
+        for i in range(self.left, self.right - 1):
             xs_[i] = self.xs[i]
 
         self.xs = xs_

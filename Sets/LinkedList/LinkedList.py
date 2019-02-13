@@ -5,7 +5,9 @@ class LinkedList:
 
     """ Time Complexity: O(1) """
     def __init__(self):
-        self.left = None
+
+        self.n = 0
+        self.left = self.right = None
 
     ###########################################################################
     # Set operations

@@ -3,9 +3,9 @@ class DynamicUnsortedArray:
     """ Time Complexity: O(n) """
     def __init__(self):
 
-        self.N = 0
+        self.N = 1
         self.n = 0
-        self.xs = None
+        self.xs = self.allocate(1)
 
     ###########################################################################
     # Utilities
